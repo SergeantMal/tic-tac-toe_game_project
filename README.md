@@ -22,7 +22,7 @@
 
 1. Клонируйте этот репозиторий:
    ```bash
-   git clone https://github.com/yourusername/tic-tac-toe_game_project.git
+   git clone https://github.com/SergeantPal/tic-tac-toe_game_project.git
    ```
 
 2. Перейдите в каталог проекта:
