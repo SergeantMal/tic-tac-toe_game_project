@@ -96,8 +96,14 @@ def start_game():
         messagebox.showwarning("Ошибка", "Введите имена обоих игроков!")
         return
 
-    symbols = ["X", "O"]
-    random.shuffle(symbols)
+    if random_var.get():  # Если чекбокс "Случайный выбор" включен
+        symbols = ["X", "O"]
+        random.shuffle(symbols)
+    else:  # Иначе игроки выбирают сами
+        symbol1 = symbol_var1.get()
+        symbol2 = "O" if symbol1 == "X" else "X"
+        symbols = [symbol1, symbol2]
+
     players.clear()
     players.append(Player(name1, symbols[0]))
     players.append(Player(name2, symbols[1]))
@@ -123,6 +129,19 @@ player1_entry.grid(row=0, column=1, padx=5, pady=5)
 tk.Label(frame_inputs, text="Имя игрока 2:", bg="#f0f0f0").grid(row=1, column=0, padx=5, pady=5, sticky="w")
 player2_entry = tk.Entry(frame_inputs)
 player2_entry.grid(row=1, column=1, padx=5, pady=5)
+
+# Выбор символов
+tk.Label(frame_inputs, text="Игрок 1 играет за:", bg="#f0f0f0").grid(row=2, column=0, padx=5, pady=5, sticky="w")
+symbol_var1 = tk.StringVar(value="X")
+symbol_x = tk.Radiobutton(frame_inputs, text="X", variable=symbol_var1, value="X", bg="#f0f0f0")
+symbol_x.grid(row=2, column=1, sticky="w")
+symbol_o = tk.Radiobutton(frame_inputs, text="O", variable=symbol_var1, value="O", bg="#f0f0f0")
+symbol_o.grid(row=2, column=2, sticky="w")
+
+# Чекбокс случайного выбора
+random_var = tk.BooleanVar()
+random_checkbox = tk.Checkbutton(frame_inputs, text="Случайный выбор", variable=random_var, bg="#f0f0f0")
+random_checkbox.grid(row=3, column=0, columnspan=2, pady=5)
 
 start_button = tk.Button(window, text="Начать игру", font=("Arial", 12), bg="#5cb85c", fg="white", command=start_game)
 start_button.pack(pady=10)
@@ -157,4 +176,3 @@ restart_button = tk.Button(frame_buttons, text="Новая игра", font=("Ari
 restart_button.pack(side="right", padx=5)
 
 window.mainloop()
-
