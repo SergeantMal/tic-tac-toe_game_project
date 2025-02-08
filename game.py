@@ -29,6 +29,17 @@ def check_winner():
 
    return False
 
+def check_draw():
+
+   # Проверка на ничью
+
+   for i in range(3):
+       for j in range(3):
+           if buttons[i][j]["text"] == "":
+               return False
+
+   return True
+
 
 
 
@@ -45,6 +56,9 @@ def on_click(row, col):
 
    if check_winner():
        messagebox.showinfo("Игра окончена",f"Игрок {current_player} победил!")
+
+   if check_draw():
+       messagebox.showinfo("Игра окончена", "Ничья!")
 
 
    current_player = "0" if current_player == "X" else "X"
